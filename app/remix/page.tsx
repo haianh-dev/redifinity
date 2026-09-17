@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import costumes from "@/data/vietnamese-costumes/costumes.json";
+import { CollarIcon } from "@/components/CollarIcon";
 
 const OCCASIONS = [
   "Lễ nghi / Nghi thức trang trọng",
@@ -32,13 +33,9 @@ export default function RemixPage() {
         body: JSON.stringify({ costumeId, occasion }),
       });
       const json = await res.json();
-
-      if (!json.success) {
-        setError(json.error?.message ?? "Có lỗi xảy ra");
-      } else {
-        setResult(json);
-      }
-    } catch (e) {
+      if (!json.success) setError(json.error?.message ?? "Có lỗi xảy ra");
+      else setResult(json);
+    } catch {
       setError("Không kết nối được tới server");
     } finally {
       setLoading(false);
@@ -46,81 +43,145 @@ export default function RemixPage() {
   }
 
   return (
-    <div style={{ maxWidth: 600, margin: "40px auto", padding: 24, fontFamily: "sans-serif" }}>
-      <h1>Redifinity — Việt Phục Remix</h1>
+    <div className="min-h-screen bg-paper text-ink">
+      {/* Hero */}
+      <header className="max-w-3xl mx-auto px-6 pt-16 pb-10">
+        <p className="font-body text-xs tracking-widest text-gold uppercase mb-3">
+          Redifinity
+        </p>
+        <h1 className="font-display text-4xl sm:text-5xl leading-tight mb-4">
+          Việt phục, phối theo cách của bạn.
+        </h1>
+        <p className="font-body text-ink/70 max-w-md leading-relaxed">
+          Chọn một dáng áo, chọn một bối cảnh — nhận gợi ý phối đồ vừa hợp
+          gu cá nhân, vừa tôn trọng đúng gốc gác văn hóa.
+        </p>
+      </header>
 
-      <label style={{ display: "block", marginTop: 20 }}>Chọn trang phục nền:</label>
-      <select
-        value={costumeId}
-        onChange={(e) => setCostumeId(e.target.value)}
-        style={{ width: "100%", padding: 8, marginTop: 4 }}
-      >
-        {costumes.map((c) => (
-          <option key={c.id} value={c.id}>{c.name}</option>
-        ))}
-      </select>
+      <main className="max-w-3xl mx-auto px-6 pb-24">
+        {/* Costume gallery */}
+        <section>
+          <h2 className="font-body text-sm font-medium text-ink/60 mb-4">
+            1. Chọn trang phục nền
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {costumes.map((c) => {
+              const active = c.id === costumeId;
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => setCostumeId(c.id)}
+                  className={`text-left p-4 border transition-colors ${
+                    active
+                      ? "border-lacquer bg-lacquer/5"
+                      : "border-ink/15 hover:border-ink/40"
+                  }`}
+                >
+                  <CollarIcon costumeId={c.id} />
+                  <p className="font-display text-lg mt-2 leading-snug">
+                    {c.name}
+                  </p>
+                  <p className="font-body text-xs text-ink/50 mt-1">
+                    {c.region}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
+        </section>
 
-      <label style={{ display: "block", marginTop: 20 }}>Chọn bối cảnh sử dụng:</label>
-      <select
-        value={occasion}
-        onChange={(e) => setOccasion(e.target.value)}
-        style={{ width: "100%", padding: 8, marginTop: 4 }}
-      >
-        {OCCASIONS.map((o) => (
-          <option key={o} value={o}>{o}</option>
-        ))}
-      </select>
+        {/* Occasion pills */}
+        <section className="mt-10">
+          <h2 className="font-body text-sm font-medium text-ink/60 mb-4">
+            2. Chọn bối cảnh sử dụng
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {OCCASIONS.map((o) => {
+              const active = o === occasion;
+              return (
+                <button
+                  key={o}
+                  onClick={() => setOccasion(o)}
+                  className={`font-body text-sm px-4 py-2 rounded-full border transition-colors ${
+                    active
+                      ? "bg-indigo text-paper border-indigo"
+                      : "border-ink/20 hover:border-ink/50"
+                  }`}
+                >
+                  {o}
+                </button>
+              );
+            })}
+          </div>
+        </section>
 
-      <button
-        onClick={handleSubmit}
-        disabled={loading}
-        style={{
-          marginTop: 24,
-          padding: "10px 20px",
-          background: "black",
-          color: "white",
-          border: "none",
-          borderRadius: 6,
-          cursor: "pointer",
-        }}
-      >
-        {loading ? "Đang xử lý..." : "Remix ngay"}
-      </button>
+        {/* Submit */}
+        <button
+          onClick={handleSubmit}
+          disabled={loading}
+          className="mt-10 font-body font-medium bg-ink text-paper px-6 py-3 hover:bg-indigo transition-colors disabled:opacity-50"
+        >
+          {loading ? "Đang phối đồ..." : "Remix ngay"}
+        </button>
 
-      {error && (
-        <p style={{ color: "red", marginTop: 20 }}>{error}</p>
-      )}
+        {error && (
+          <p className="mt-6 font-body text-sm text-lacquer">{error}</p>
+        )}
 
-      {result && (
-        <div style={{ marginTop: 24, padding: 16, background: "#f5f5f5", borderRadius: 8 }}>
-          <h3>Kết quả gợi ý</h3>
-          <p><strong>Giải thích:</strong> {result.data.explanation}</p>
-          <p><strong>Đánh giá văn hóa:</strong> {result.data.culturalAssessment.appropriatenessScore}</p>
-          <p><strong>Ghi chú:</strong> {result.data.culturalAssessment.note}</p>
+        {/* Result card */}
+        {result && (
+          <section className="mt-12 border border-ink/15">
+            <div className="h-1 bg-gradient-to-r from-lacquer via-gold to-indigo" />
+            <div className="p-6 sm:p-8">
+              <p className="font-body text-xs tracking-widest text-gold uppercase mb-3">
+                Gợi ý phối đồ
+              </p>
+              <p className="font-display text-xl leading-relaxed mb-6">
+                {result.data.explanation}
+              </p>
 
-          {result.validation.advisoryNotes.length > 0 && (
-            <div style={{ marginTop: 12, padding: 12, background: "#fff3cd", borderRadius: 6 }}>
-              <strong>Lưu ý:</strong>
-              <ul>
-                {result.validation.advisoryNotes.map((n: string, i: number) => (
-                  <li key={i}>{n}</li>
-                ))}
-              </ul>
+              <div className="flex items-center gap-3 font-body text-sm mb-6">
+                <span className="px-3 py-1 border border-ink/20 rounded-full">
+                  {result.data.culturalAssessment.appropriatenessScore}
+                </span>
+                <span className="text-ink/50">
+                  Độ tin cậy: {result.data.confidence}
+                </span>
+              </div>
+
+              <p className="font-body text-sm text-ink/70 leading-relaxed">
+                {result.data.culturalAssessment.note}
+              </p>
+
+              {result.validation.advisoryNotes.length > 0 && (
+                <div className="mt-6 border-l-2 border-gold pl-4">
+                  <p className="font-body text-xs uppercase tracking-wide text-gold mb-2">
+                    Lưu ý
+                  </p>
+                  <ul className="font-body text-sm space-y-1 text-ink/80">
+                    {result.validation.advisoryNotes.map((n: string, i: number) => (
+                      <li key={i}>{n}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {result.validation.triggeredCautions.length > 0 && (
+                <div className="mt-6 border-l-2 border-lacquer pl-4">
+                  <p className="font-body text-xs uppercase tracking-wide text-lacquer mb-2">
+                    Đại kỵ văn hóa cần biết
+                  </p>
+                  <ul className="font-body text-sm space-y-1 text-ink/80">
+                    {result.validation.triggeredCautions.map((c: string, i: number) => (
+                      <li key={i}>{c}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-          )}
-
-          {result.validation.triggeredCautions.length > 0 && (
-            <div style={{ marginTop: 12, padding: 12, background: "#fde2e2", borderRadius: 6 }}>
-              <strong>Đại kỵ văn hóa cần biết:</strong>
-              <ul>
-                {result.validation.triggeredCautions.map((c: string, i: number) => (
-                  <li key={i}>{c}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
+          </section>
+        )}
+      </main>
     </div>
   );
 }

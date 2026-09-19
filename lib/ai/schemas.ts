@@ -96,3 +96,45 @@ export const RemixApiResponseSchema = z.object({
 });
 
 export type RemixApiResponse = z.infer<typeof RemixApiResponseSchema>;
+
+/* -------------------------------------------------------------------- */
+/*  /api/recommend contract                                              */
+/* -------------------------------------------------------------------- */
+
+export const RecommendInputSchema = z.object({
+  occasion: RemixInputSchema.shape.occasion,
+  stylePreferences: z.string().max(300).optional(),
+  preferredColors: z.array(z.string()).max(5).optional(),
+  audience: z.enum(["teen", "young-adult", "general"]).default("general"),
+});
+export type RecommendInput = z.infer<typeof RecommendInputSchema>;
+
+export const RecommendedCostumeSchema = z.object({
+  costumeId: z.string(),
+  name: z.string(),
+  reason: z.string(),
+});
+
+export const RecommendOutputSchema = z.object({
+  recommendations: z.array(RecommendedCostumeSchema).max(3),
+});
+export type RecommendOutput = z.infer<typeof RecommendOutputSchema>;
+
+/* -------------------------------------------------------------------- */
+/*  /api/cultural-check contract                                         */
+/* -------------------------------------------------------------------- */
+
+export const CulturalCheckInputSchema = z.object({
+  costumeId: z.string().min(1),
+  occasion: RemixInputSchema.shape.occasion,
+  colors: z.array(z.string()).max(5).optional(),
+  accessories: z.array(z.string()).max(10).optional(),
+});
+export type CulturalCheckInput = z.infer<typeof CulturalCheckInputSchema>;
+
+export const CulturalCheckOutputSchema = z.object({
+  isValid: z.boolean(),
+  triggeredCautions: z.array(z.string()),
+  advisoryNotes: z.array(z.string()),
+});
+export type CulturalCheckOutput = z.infer<typeof CulturalCheckOutputSchema>;

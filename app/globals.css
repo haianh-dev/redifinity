@@ -2,6 +2,7 @@
 
 @theme {
   --color-paper: #f3eee1;
+  --color-paper-dim: #ebe4d2;
   --color-ink: #211d1a;
   --color-indigo: #22304a;
   --color-lacquer: #a23b2e;
@@ -15,4 +16,21 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
+}
+
+/* Focus ring visible cho bàn phím */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Scroll smooth */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection màu chàm */
+::selection {
+  background-color: var(--color-indigo);
+  color: var(--color-paper);
 }

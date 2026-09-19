@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redifinity — Việt Phục Remix | Khám Phá & Phối Việt Phục Gen Z</title>
+  <meta name="description" content="Nền tảng khám phá, phối trang phục truyền thống Việt Nam chuẩn mực văn hóa dành cho giới trẻ sáng tạo.">
+  
+  <!-- Google Fonts: Fraunces & Be Vietnam Pro (Full Vietnamese Diacritics Support) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & CSS VARIABLES
+       Style: Soft Wellness UI for Traditional Vietnamese Fashion
+       ========================================================================== */
+    :root {
+      /* Color Palette */
+      --bg-warm-white: #F7F4EE;
+      --bg-card: #FAF7F2;
+      --bg-secondary-soft: #F0EAE1;
+      
+      --primary-lacquer: #A23B2E;
+      --primary-lacquer-light: #F4E7E5;
+      
+      --secondary-indigo: #22304A;
+      --secondary-indigo-light: #E8EDF5;
+      
+      --accent-gold: #B8923F;
+      --accent-gold-soft: #F9F5EB;
+      
+      --text-dark-ink: #211D1A;
+      --text-muted-ink: #6E6259;
+      --text-light-gold: #D4AF37;
+
+      /* Neumorphic Shadows */
+      --shadow-flat: -5px -5px 15px rgba(255, 255, 255, 0.95), 5px 5px 15px rgba(163, 137, 120, 0.12);
+      --shadow-hover: -7px -7px 20px rgba(255, 255, 255, 1), 7px 7px 22px rgba(163, 137, 120, 0.18);
+      --shadow-inset: inset -3px -3px 8px rgba(255, 255, 255, 0.9), inset 3px 3px 8px rgba(163, 137, 120, 0.15);
+
+      /* Typography Scale (8px Grid & Fluid Clamp) */
+      --font-heading: 'Fraunces', serif;
+      --font-body: 'Be Vietnam Pro', sans-serif;
+
+      --fs-display: clamp(2.75rem, 5.5vw, 5rem);
+      --fs-h1: clamp(2.25rem, 4.5vw, 3.75rem);
+      --fs-h2: clamp(1.75rem, 3vw, 2.75rem);
+      --fs-h3: clamp(1.25rem, 2vw, 1.75rem);
+      --fs-body: 1.125rem;
+      --fs-small: 0.875rem;
+
+      /* Spacing & Radius */
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 9999px;
+
+      --transition-smooth: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset & Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-warm-white);
+      color: var(--text-dark-ink);
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+      word-break: break-word;
+    }
+
+    /* Container Standard Padding (Strict 8px Grid) */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+    }
+
+    /* Section Spacing Guidelines */
+    .section-padding {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    @media (min-width: 1024px) {
+      .section-padding {
+        padding-top: 96px;
+        padding-bottom: 96px;
+      }
+    }
+
+    /* Common Divider Lines & Wave SVG Containers */
+    .gold-divider {
+      width: 64px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 16px auto 0 auto;
+      border-radius: var(--radius-pill);
+    }
+
+    .wave-container {
+      width: 100%;
+      line-height: 0;
+      overflow: hidden;
+    }
+
+    .wave-container svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .wave-container svg {
+        height: 80px;
+      }
+    }
+
+    /* Neumorphic Common Interactive Elements */
+    .neu-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-flat);
+      transition: var(--transition-smooth);
+    }
+
+    .neu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .neu-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 12px 32px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      color: var(--text-dark-ink);
+      font-family: var(--font-body);
+      font-size: var(--fs-small);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border: 1px solid rgba(184, 146, 63, 0.2);
+      box-shadow: var(--shadow-flat);
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      gap: 8px;
+    }
+
+    .neu-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      color: var(--primary-lacquer);
+    }
+
+    .neu-button:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-inset);
+    }
+
+    .neu-button-primary {
+      background: var(--primary-lacquer);
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 8px 20px rgba(162, 59, 46, 0.25);
+    }
+
+    .neu-button-primary:hover {
+      background: #8B3025;
+      color: #FFFFFF;
+      box-shadow: 0 12px 24px rgba(162, 59, 46, 0.35);
+    }
+
+    .neu-icon-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-warm-white);
+      box-shadow: var(--shadow-flat);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-lacquer);
+      margin-bottom: 16px;
+    }
+
+    /* Section Titles */
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-subtitle {
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-gold);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h2);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-dark-ink);
+    }
+
+
+    /* ==========================================================================
+       SECTION 1: NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(247, 244, 238, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184, 146, 63, 0.15);
+      transition: var(--transition-smooth);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--primary-lacquer);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    @media (min-width: 900px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dark-ink);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      font-weight: 400;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-lacquer);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+    }
+
+
+    /* ==========================================================================
+       SECTION 2: HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding-top: 160px;
+      padding-bottom: 96px;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(244, 231, 229, 0.8) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(232, 237, 245, 0.8) 0%, transparent 40%),
+        var(--bg-warm-white);
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .hero-badge {
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold);
+      font-weight: 500;
+      background: var(--bg-card);
+      padding: 6px 20px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-flat);
+      border: 1px solid rgba(184, 146, 63, 0.2);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: var(--fs-display);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--text-dark-ink);
+    }
+
+    .hero-title span {
+      color: var(--primary-lacquer);
+    }
+
+    .hero-description {
+      font-size: var(--fs-body);
+      color: var(--text-muted-ink);
+      max-width: 680px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+
+    /* ==========================================================================
+       SECTION 3: INTRO QUOTE SECTION
+       ========================================================================== */
+    .intro-quote-section {
+      background: var(--bg-warm-white);
+      text-align: center;
+    }
+
+    .quote-box {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .quote-text {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--secondary-indigo);
+    }
+
+    .quote-author {
+      margin-top: 16px;
+      font-size: var(--fs-small);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted-ink);
+    }
+
+
+    /* ==========================================================================
+       SECTION 4: TREATMENTS SECTION (5 VIỆT PHỤC DI SẢN)
+       ========================================================================== */
+    .treatments-section {
+      background: var(--bg-warm-white);
+    }
+
+    .treatments-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .treatments-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .treatments-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .treatment-card {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .treatment-title {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h3);
+      font-style: italic;
+      color: var(--text-dark-ink);
+    }
+
+    .treatment-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted-ink);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .treatment-link {
+      margin-top: 8px;
+      font-size: var(--fs-small);
+      font-weight: 500;
+      color: var(--primary-lacquer);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .treatment-link:hover {
+      gap: 10px;
+      color: var(--accent-gold);
+    }
+
+
+    /* ==========================================================================
+       SECTION 5: BOOKING / EXPERIENCE SECTION
+       ========================================================================== */
+    .experience-section {
+      background: var(--bg-warm-white);
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .experience-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .experience-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      color: var(--text-dark-ink);
+    }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--secondary-indigo-light);
+      color: var(--secondary-indigo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Calendar Mockup Styling */
+    .calendar-card {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--secondary-indigo);
+      border-bottom: 1px solid rgba(184, 146, 63, 0.15);
+      padding-bottom: 16px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .calendar-day-head {
+      font-weight: 500;
+      color: var(--text-muted-ink);
+      padding-bottom: 8px;
+    }
+
+    .calendar-day {
+      padding: 10px 0;
+      border-radius: var(--radius-sm);
+      color: var(--text-dark-ink);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .calendar-day:hover {
+      background: var(--bg-secondary-soft);
+    }
+
+    .calendar-day.active {
+      background: var(--primary-lacquer);
+      color: #FFFFFF;
+      font-weight: 600;
+      box-shadow: var(--shadow-inset);
+    }
+
+    .time-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .time-pill {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-warm-white);
+      box-shadow: var(--shadow-flat);
+      font-size: 0.8rem;
+      color: var(--text-muted-ink);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+    }
+
+    .time-pill:hover, .time-pill.selected {
+      border-color: var(--accent-gold);
+      color: var(--primary-lacquer);
+      box-shadow: var(--shadow-inset);
+    }
+
+
+    /* ==========================================================================
+       SECTION 6: GALLERY (OUR SPACE / BỘ BỘ BST VIỆT PHỤC)
+       ========================================================================== */
+    .gallery-section {
+      background: var(--bg-warm-white);
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .bento-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+    }
+
+    .bento-item {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 280px;
+      box-shadow: var(--shadow-flat);
+    }
+
+    .bento-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 500ms ease;
+    }
+
+    .bento-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .bento-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(33, 29, 26, 0.7) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+      color: #FFFFFF;
+    }
+
+    .bento-caption {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    @media (min-width: 768px) {
+      .bento-1 { grid-column: span 8; height: 380px; }
+      .bento-2 { grid-column: span 4; height: 380px; }
+      .bento-3 { grid-column: span 4; height: 320px; }
+      .bento-4 { grid-column: span 8; height: 320px; }
+    }
+
+
+    /* ==========================================================================
+       SECTION 7: PRACTITIONERS SECTION (CỐ VẤN VĂN HÓA & STYLIST)
+       ========================================================================== */
+    .practitioners-section {
+      background: var(--bg-warm-white);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .team-card {
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .avatar-wrapper {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      padding: 6px;
+      background: var(--bg-warm-white);
+      box-shadow: var(--shadow-flat);
+    }
+
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text-dark-ink);
+    }
+
+    .team-role {
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+
+    .team-bio {
+      font-size: 0.9rem;
+      color: var(--text-muted-ink);
+      line-height: 1.6;
+    }
+
+
+    /* ==========================================================================
+       SECTION 8: TESTIMONIALS SECTION
+       ========================================================================== */
+    .testimonials-section {
+      background: var(--bg-secondary-soft);
+      position: relative;
+    }
+
+    .testimonial-box {
+      max-width: 840px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .quote-watermark {
+      font-family: var(--font-heading);
+      font-size: 12rem;
+      line-height: 0;
+      color: rgba(184, 146, 63, 0.12);
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+      font-style: italic;
+      color: var(--text-dark-ink);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .author-name {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--primary-lacquer);
+    }
+
+    .author-title {
+      font-size: var(--fs-small);
+      color: var(--text-muted-ink);
+    }
+
+    .testimonial-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(110, 98, 89, 0.3);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .dot.active {
+      background: var(--primary-lacquer);
+      width: 24px;
+      border-radius: var(--radius-pill);
+    }
+
+
+    /* ==========================================================================
+       SECTION 9: PACKAGES SECTION
+       ========================================================================== */
+    .packages-section {
+      background: var(--bg-warm-white);
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    @media (min-width: 1024px) {
+      .packages-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .package-card {
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .package-card.featured {
+      border: 1px solid rgba(184, 146, 63, 0.4);
+      background: #FFFFFF;
+    }
+
+    @media (min-width: 1024px) {
+      .package-card.featured {
+        transform: scale(1.04);
+      }
+      .package-card.featured:hover {
+        transform: scale(1.04) translateY(-3px);
+      }
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-gold);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 4px 16px;
+      border-radius: var(--radius-pill);
+      font-weight: 500;
+    }
+
+    .package-title {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h3);
+      font-style: italic;
+      color: var(--text-dark-ink);
+    }
+
+    .package-price {
+      font-family: var(--font-heading);
+      font-size: 2.75rem;
+      color: var(--primary-lacquer);
+      line-height: 1;
+    }
+
+    .package-duration {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-secondary-soft);
+      font-size: var(--fs-small);
+      color: var(--text-muted-ink);
+    }
+
+    .package-benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-grow: 1;
+      border-top: 1px solid rgba(184, 146, 63, 0.15);
+      padding-top: 16px;
+    }
+
+    .package-benefit-item {
+      font-size: 0.95rem;
+      color: var(--text-dark-ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .package-benefit-item.muted {
+      color: var(--text-muted-ink);
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+
+    /* ==========================================================================
+       SECTION 10: FINAL CTA SECTION
+       ========================================================================== */
+    .final-cta-section {
+      background: var(--bg-warm-white);
+    }
+
+    .cta-box {
+      background: var(--secondary-indigo);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 64px 32px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(34, 48, 74, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .cta-box {
+        padding: 80px 64px;
+      }
+    }
+
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h2);
+      font-style: italic;
+      color: #FFFFFF;
+    }
+
+    .cta-desc {
+      max-width: 600px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: var(--fs-body);
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .cta-btn-gold {
+      background: var(--accent-gold);
+      color: #FFFFFF;
+      border: none;
+    }
+
+    .cta-btn-gold:hover {
+      background: #A37F35;
+      color: #FFFFFF;
+    }
+
+    .cta-btn-outline {
+      background: transparent;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .cta-btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+    }
+
+
+    /* ==========================================================================
+       SECTION 11: FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--bg-warm-white);
+      border-top: 1px solid rgba(184, 146, 63, 0.15);
+      padding-top: 64px;
+    }
+
+    .footer-top {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 2.75rem;
+      font-style: italic;
+      color: var(--primary-lacquer);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 48px;
+      margin-bottom: 64px;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--secondary-indigo);
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+      color: var(--text-muted-ink);
+      line-height: 1.7;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-link-item a {
+      font-size: 0.9rem;
+      color: var(--text-muted-ink);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-link-item a:hover {
+      color: var(--primary-lacquer);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(184, 146, 63, 0.15);
+      padding: 24px 0;
+      text-align: center;
+      font-size: var(--fs-small);
+      color: var(--text-muted-ink);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. NAVBAR SECTION
+       ========================================================================== -->
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="nav-logo">Redifinity</a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link">Trang chủ</a></li>
+        <li><a href="#treatments" class="nav-link">Trang phục</a></li>
+        <li><a href="#experience" class="nav-link">Remix AI</a></li>
+        <li><a href="#gallery" class="nav-link">Bộ sưu tập</a></li>
+        <li><a href="#team" class="nav-link">Cố vấn</a></li>
+        <li><a href="#packages" class="nav-link">Bảng giá</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#experience" class="neu-button neu-button-primary">Thử Remix Ngay</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ==========================================================================
+       2. HERO SECTION
+       ========================================================================== -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-content">
+      <span class="hero-badge">DI SẢN VIỆT NAM — THỜI TRANG GEN Z</span>
+      <h1 class="hero-title">
+        Tôn Vinh Hồn Việt, <span>Phối Phong Cách Sáng Tạo</span>
+      </h1>
+      <p class="hero-description">
+        Khám phá chuẩn mực 5 dòng Việt phục cổ truyền kết hợp trí tuệ nhân tạo. 
+        Gợi ý phối đồ linh hoạt, bảo tồn giá trị văn hóa và tôn lên phong cách cá nhân của bạn.
+      </p>
+      <div class="hero-actions">
+        <a href="#treatments" class="neu-button neu-button-primary">Khám Phá 5 Dòng Áo</a>
+        <a href="#experience" class="neu-button">Trải Nghiệm Đặt Lịch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider (Hero -> Quote) -->
+  <div class="wave-container" style="background: var(--bg-warm-white);">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z" fill="#F7F4EE"></path>
+    </svg>
+  </div>
+
+
+  <!-- ==========================================================================
+       3. INTRO QUOTE SECTION
+       ========================================================================== -->
+  <section class="intro-quote-section section-padding">
+    <div class="container quote-box">
+      <p class="quote-text">
+        "Việt phục không chỉ đơn thuần là nếp áo tà vạt, mà là nhịp cầu tri ân ngàn năm văn hiến, nối liền di sản quá khứ với hơi thở hiện đại."
+      </p>
+      <p class="quote-author">— Redifinity Cultural Manifesto</p>
+      <div class="gold-divider"></div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       4. TREATMENTS SECTION (5 DÒNG VIỆT PHỤC DI SẢN)
+       ========================================================================== -->
+  <section id="treatments" class="treatments-section section-padding">
+    <div class="container">
+      <div class="section-title-wrap">
+        <p class="section-subtitle">Di sản độc bản</p>
+        <h2 class="section-title">Năm Dòng Trang Phục Truyền Thống</h2>
+        <div class="gold-divider"></div>
+      </div>
+
+      <div class="treatments-grid">
+        <!-- Card 1: Áo Giao Lĩnh -->
+        <div class="neu-card treatment-card">
+          <div class="neu-icon-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4l8 8 8-8M4 20h16M12 12v8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="treatment-title">Áo Giao Lĩnh</h3>
+          <p class="treatment-desc">
+            Cổ giao nhau đặc trưng của thời Lý - Trần - Lê. Vẻ đẹp cổ kính, thướt tha mang đậm dấu ấn phong kiến Việt Nam.
+          </p>
+          <a href="#" class="treatment-link">Khám phá chi tiết &rarr;</a>
+        </div>
+
+        <!-- Card 2: Áo Viên Lĩnh -->
+        <div class="neu-card treatment-card">
+          <div class="neu-icon-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M5 21v-2a7 7 0 0 1 14 0v2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="treatment-title">Áo Viên Lĩnh</h3>
+          <p class="treatment-desc">
+            Áo cổ tròn trang nhã, thường dùng trong triều chính và nghi lễ quý tộc. Đường nét tròn đầy, thể hiện sự hòa hợp.
+          </p>
+          <a href="#" class="treatment-link">Khám phá chi tiết &rarr;</a>
+        </div>
+
+        <!-- Card 3: Áo Ngũ Thân -->
+        <div class="neu-card treatment-card">
+          <div class="neu-icon-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 3h12l2 6-4 12H8L4 9l2-6z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="treatment-title">Áo Ngũ Thân</h3>
+          <p class="treatment-desc">
+            Năm thân áo tượng trưng cho ngũ thường (Nhân - Lễ - Nghĩa - Trí - Tín). Thiết kế lập lĩnh kín đáo, lịch sự.
+          </p>
+          <a href="#" class="treatment-link">Khám phá chi tiết &rarr;</a>
+        </div>
+
+        <!-- Card 4: Áo Nhật Bình -->
+        <div class="neu-card treatment-card">
+          <div class="neu-icon-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="5" y="4" width="14" height="16" rx="2"/>
+              <path d="M9 4v16M15 4v16M5 10h14" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="treatment-title">Áo Nhật Bình</h3>
+          <p class="treatment-desc">
+            Triều phục nữ quyến hoàng tộc nhà Nguyễn. Cổ áo hình chữ nhật to bản trước ngực, thêu hoa văn tinh xảo.
+          </p>
+          <a href="#" class="treatment-link">Khám phá chi tiết &rarr;</a>
+        </div>
+
+        <!-- Card 5: Áo Dài -->
+        <div class="neu-card treatment-card">
+          <div class="neu-icon-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2v20M8 6h8M6 12h12" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="treatment-title">Áo Dài Truyền Thống</h3>
+          <p class="treatment-desc">
+            Biểu tượng thời trang Việt Nam qua các thời kỳ. Quốc phục thanh thoát, tôn vinh vóc dáng người Việt.
+          </p>
+          <a href="#" class="treatment-link">Khám phá chi tiết &rarr;</a>
+        </div>
+
+        <!-- Card 6: Phối Đồ AI Remix -->
+        <div class="neu-card treatment-card" style="border: 1px dashed var(--accent-gold);">
+          <div class="neu-icon-circle" style="color: var(--accent-gold);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 3v18M3 12h18M5.5 5.5l13 13M18.5 5.5l-13 13" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="treatment-title">AI Cultural Style</h3>
+          <p class="treatment-desc">
+            Trí tuệ nhân tạo phân tích bối cảnh (Tết, Cưới hỏi, Học đường) để gợi ý trang phục chuẩn mực văn hóa nhất.
+          </p>
+          <a href="#experience" class="treatment-link">Thử nghiệm ngay &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       5. BOOKING / EXPERIENCE SECTION
+       ========================================================================== -->
+  <section id="experience" class="experience-section section-padding">
+    <div class="container">
+      <div class="experience-grid">
+        
+        <!-- Left Column: Content -->
+        <div class="experience-left">
+          <div class="section-title-wrap" style="text-align: left; margin-bottom: 0;">
+            <p class="section-subtitle">Trải nghiệm cá nhân hóa</p>
+            <h2 class="section-title">Đặt Lịch Tư Vấn & Trải Nghiệm Remix</h2>
+          </div>
+          <p style="color: var(--text-muted-ink);">
+            Hãy chọn thời gian phù hợp để trao đổi 1:1 cùng đội ngũ chuyên gia văn hóa và stylist của Redifinity. Chúng tôi giúp bạn chọn đúng kiểu dáng, phối phụ kiện chuẩn lễ nghi.
+          </p>
+
+          <ul class="checklist">
+            <li class="checklist-item">
+              <span class="check-icon">&#10003;</span>
+              <span>Kiểm tra độ chính xác chuẩn mực văn hóa (Cultural Check)</span>
+            </li>
+            <li class="checklist-item">
+              <span class="check-icon">&#10003;</span>
+              <span>Gợi ý phối phụ kiện: Hài, nón lá, kiềng bạc, quạt xếp</span>
+            </li>
+            <li class="checklist-item">
+              <span class="check-icon">&#10003;</span>
+              <span>Thử đồ thực tế ảo và tư vấn chọn chất liệu vải</span>
+            </li>
+          </ul>
+
+          <div style="margin-top: 8px;">
+            <a href="#packages" class="neu-button neu-button-primary">Xác Nhận Đặt Lịch</a>
+          </div>
+        </div>
+
+        <!-- Right Column: Calendar & Time Slots Mockup -->
+        <div class="neu-card calendar-card">
+          <div class="calendar-header">
+            <span>Tháng 9, 2026</span>
+            <span style="font-size: 0.9rem; color: var(--accent-gold);">&lt; Hôm nay &gt;</span>
+          </div>
+
+          <div class="calendar-grid">
+            <div class="calendar-day-head">T2</div>
+            <div class="calendar-day-head">T3</div>
+            <div class="calendar-day-head">T4</div>
+            <div class="calendar-day-head">T5</div>
+            <div class="calendar-day-head">T6</div>
+            <div class="calendar-day-head">T7</div>
+            <div class="calendar-day-head">CN</div>
+
+            <div class="calendar-day" style="opacity: 0.4;">28</div>
+            <div class="calendar-day" style="opacity: 0.4;">29</div>
+            <div class="calendar-day" style="opacity: 0.4;">30</div>
+            <div class="calendar-day">1</div>
+            <div class="calendar-day">2</div>
+            <div class="calendar-day">3</div>
+            <div class="calendar-day">4</div>
+            <div class="calendar-day">5</div>
+            <div class="calendar-day">6</div>
+            <div class="calendar-day">7</div>
+            <div class="calendar-day">8</div>
+            <div class="calendar-day active">9</div>
+            <div class="calendar-day">10</div>
+            <div class="calendar-day">11</div>
+            <div class="calendar-day">12</div>
+            <div class="calendar-day">13</div>
+            <div class="calendar-day">14</div>
+            <div class="calendar-day">15</div>
+            <div class="calendar-day">16</div>
+            <div class="calendar-day">17</div>
+            <div class="calendar-day">18</div>
+          </div>
+
+          <div>
+            <p style="font-size: 0.85rem; color: var(--text-muted-ink); margin-bottom: 12px; font-weight: 500;">
+              Khung giờ khả dụng:
+            </p>
+            <div class="time-slots">
+              <span class="time-pill selected">09:00 AM</span>
+              <span class="time-pill">10:30 AM</span>
+              <span class="time-pill">02:00 PM</span>
+              <span class="time-pill">04:00 PM</span>
+              <span class="time-pill">07:30 PM</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       6. GALLERY (OUR SPACE / BỘ SƯU TẬP VIỆT PHỤC)
+       ========================================================================== -->
+  <section id="gallery" class="gallery-section section-padding">
+    <div class="container">
+      <div class="section-title-wrap">
+        <p class="section-subtitle">Góc Nhìn Di Sản</p>
+        <h2 class="section-title">Bộ Sưu Tập Không Gian Việt Phục</h2>
+        <div class="gold-divider"></div>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-item bento-1">
+          <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1000&q=80" alt="Việt Phục Không Gian Cổ Kính">
+          <div class="bento-overlay">
+            <span class="bento-caption">Áo Giao Lĩnh — Không Gian Cố Đô</span>
+          </div>
+        </div>
+
+        <div class="bento-item bento-2">
+          <img src="https://images.unsplash.com/photo-1508807526345-15e9b5f4eaff?auto=format&fit=crop&w=800&q=80" alt="Chi Tiết Thêu Thùa">
+          <div class="bento-overlay">
+            <span class="bento-caption">Họa Tiết Nhật Bình Hoàng Tộc</span>
+          </div>
+        </div>
+
+        <div class="bento-item bento-3">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Stylist Việt Phục">
+          <div class="bento-overlay">
+            <span class="bento-caption">Gợi Ý Phối Đồ Hiện Đại</span>
+          </div>
+        </div>
+
+        <div class="bento-item bento-4">
+          <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1000&q=80" alt="Nối Liền Thế Hệ">
+          <div class="bento-overlay">
+            <span class="bento-caption">Nét Đẹp Ngũ Thân Lập Lĩnh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       7. PRACTITIONERS SECTION (CỐ VẤN VĂN HÓA & TEAM)
+       ========================================================================== -->
+  <section id="team" class="practitioners-section section-padding">
+    <div class="container">
+      <div class="section-title-wrap">
+        <p class="section-subtitle">Hội Đồng Chuyên Gia</p>
+        <h2 class="section-title">Cố Vấn Văn Hóa & Stylist</h2>
+        <div class="gold-divider"></div>
+      </div>
+
+      <div class="team-grid">
+        <!-- Team 1 -->
+        <div class="neu-card team-card">
+          <div class="avatar-wrapper">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="PGS.TS Trịnh Hoài An">
+          </div>
+          <h3 class="team-name">PGS.TS Trịnh Hoài An</h3>
+          <span class="team-role">Cố Vấn Lịch Sử & Y Phục</span>
+          <p class="team-bio">
+            Hơn 20 năm nghiên cứu trang phục triều Nguyễn và phong tục lễ nghi truyền thống Việt Nam.
+          </p>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="neu-card team-card">
+          <div class="avatar-wrapper">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Lê Hoàng Minh">
+          </div>
+          <h3 class="team-name">Lê Hoàng Minh</h3>
+          <span class="team-role">Lead Fashion Stylist</span>
+          <p class="team-bio">
+            Tiên phong trong các phong trào phối Việt phục cùng phục sức hiện đại dành cho giới trẻ.
+          </p>
+        </div>
+
+        <!-- Team 3 -->
+        <div class="neu-card team-card">
+          <div class="avatar-wrapper">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Nguyễn Hà Phương">
+          </div>
+          <h3 class="team-name">Nguyễn Hà Phương</h3>
+          <span class="team-role">AI Cultural Experience Designer</span>
+          <p class="team-bio">
+            Tối ưu hóa các thuật toán AI giúp đề xuất phối đồ chính xác theo ngữ cảnh lễ hội & sự kiện.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       8. TESTIMONIALS SECTION
+       ========================================================================== -->
+  <section class="testimonials-section section-padding">
+    <div class="container">
+      <div class="testimonial-box">
+        <span class="quote-watermark">&ldquo;</span>
+        <p class="testimonial-quote">
+          "Redifinity giúp mình tự tin mặc Áo Ngũ Thân đi dự lễ tốt nghiệp đại học mà không lo bị phối sai quy chuẩn văn hóa. Trải nghiệm Remix AI cực kỳ trực quan và tinh tế!"
+        </p>
+        <div class="testimonial-author">
+          <span class="author-name">Trần Mai Anh</span>
+          <span class="author-title">Sinh viên & Creator Gen Z</span>
+        </div>
+        <div class="testimonial-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider (Testimonials -> Packages) -->
+  <div class="wave-container" style="background: var(--bg-secondary-soft);">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C300,90 600,-40 900,60 C1050,110 1150,30 1200,10 L1200,120 L0,120 Z" fill="#F7F4EE"></path>
+    </svg>
+  </div>
+
+
+  <!-- ==========================================================================
+       9. PACKAGES SECTION
+       ========================================================================== -->
+  <section id="packages" class="packages-section section-padding">
+    <div class="container">
+      <div class="section-title-wrap">
+        <p class="section-subtitle">Dịch Vụ & Trải Nghiệm</p>
+        <h2 class="section-title">Các Gói Tư Vấn & Remix Việt Phục</h2>
+        <div class="gold-divider"></div>
+      </div>
+
+      <div class="packages-grid">
+        <!-- Package 1 -->
+        <div class="neu-card package-card">
+          <h3 class="package-title">Gói Khám Phá</h3>
+          <div class="package-price">Miễn phí</div>
+          <span class="package-duration">Trải nghiệm Online</span>
+          <ul class="package-benefits">
+            <li class="package-benefit-item"><span>&#10003;</span> Khám phá 5 dòng Việt phục cổ</li>
+            <li class="package-benefit-item"><span>&#10003;</span> Gợi ý phối đồ AI cơ bản</li>
+            <li class="package-benefit-item muted"><span>&#10005;</span> Tư vấn 1:1 với Stylist</li>
+            <li class="package-benefit-item muted"><span>&#10005;</span> Kiểm tra Cultural Check chuyên sâu</li>
+          </ul>
+          <a href="#" class="neu-button" style="width: 100%;">Trải Nghiệm Ngay</a>
+        </div>
+
+        <!-- Package 2 (Featured) -->
+        <div class="neu-card package-card featured">
+          <span class="featured-badge">Khuyên Dùng</span>
+          <h3 class="package-title">Gói Style Remix</h3>
+          <div class="package-price">499.000đ</div>
+          <span class="package-duration">Buổi tư vấn 45 phút</span>
+          <ul class="package-benefits">
+            <li class="package-benefit-item"><span>&#10003;</span> Đầy đủ tính năng gói Khám Phá</li>
+            <li class="package-benefit-item"><span>&#10003;</span> Tư vấn trực tiếp với Stylist văn hóa</li>
+            <li class="package-benefit-item"><span>&#10003;</span> Gợi ý phối phụ kiện & makeup tương thích</li>
+            <li class="package-benefit-item"><span>&#10003;</span> Báo cáo Cultural Check chi tiết</li>
+          </ul>
+          <a href="#" class="neu-button neu-button-primary" style="width: 100%;">Đăng Ký Đặt Lịch</a>
+        </div>
+
+        <!-- Package 3 -->
+        <div class="neu-card package-card">
+          <h3 class="package-title">Gói Di Sản Toàn Diện</h3>
+          <div class="package-price">1.299.000đ</div>
+          <span class="package-duration">Dịch vụ may & phối đồ</span>
+          <ul class="package-benefits">
+            <li class="package-benefit-item"><span>&#10003;</span> Quyền lợi gói Style Remix</li>
+            <li class="package-benefit-item"><span>&#10003;</span> May đo/Cho thuê trang phục chuẩn phom</li>
+            <li class="package-benefit-item"><span>&#10003;</span> Hỗ trợ hậu kỳ ảnh chụp & sự kiện</li>
+            <li class="package-benefit-item"><span>&#10003;</span> Thẻ thành viên Redifinity Club</li>
+          </ul>
+          <a href="#" class="neu-button" style="width: 100%;">Liên Hệ Tư Vấn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       10. FINAL CTA SECTION
+       ========================================================================== -->
+  <section class="final-cta-section section-padding">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">Sẵn Sàng Khám Phá Việt Phục Của Riêng Bạn?</h2>
+        <p class="cta-desc">
+          Bắt đầu hành trình nối liền quá khứ và hiện đại ngay hôm nay cùng Redifinity — Nền tảng tôn vinh bản sắc Việt dành cho thế hệ trẻ.
+        </p>
+        <div class="cta-buttons">
+          <a href="#experience" class="neu-button cta-btn-gold">Bắt Đầu Thử Remix</a>
+          <a href="#treatments" class="neu-button cta-btn-outline">Tìm Hiểu Y Phục</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       11. FOOTER SECTION
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <span class="footer-logo">Redifinity</span>
+        <p style="font-size: 0.9rem; color: var(--text-muted-ink); max-width: 500px;">
+          Nền tảng sáng tạo y phục truyền thống Việt Nam — Tôn trọng di sản, lan tỏa phong cách.
+        </p>
+        <div class="gold-divider"></div>
+      </div>
+
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Địa Chỉ Không Gian</h4>
+          <p class="footer-text">
+            <strong>Hà Nội:</strong> 88 Phố Tràng Tiền, Quận Hoàn Kiếm<br>
+            <strong>TP. Hồ Chí Minh:</strong> 124 Đồng Khởi, Quận 1
+          </p>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Giờ Mở Cửa</h4>
+          <p class="footer-text">
+            Thứ Hai — Thứ Sáu: 08:30 – 20:30<br>
+            Thứ Bảy — Chủ Nhật: 09:00 – 21:30
+          </p>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Liên Kết Nhanh</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a href="#hero">Trang chủ Redifinity</a></li>
+            <li class="footer-link-item"><a href="#treatments">5 Dòng Áo Truyền Thống</a></li>
+            <li class="footer-link-item"><a href="#experience">Công Cụ AI Remix</a></li>
+            <li class="footer-link-item"><a href="#packages">Bảng Giá Dịch Vụ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Redifinity — Việt Phục Remix. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
